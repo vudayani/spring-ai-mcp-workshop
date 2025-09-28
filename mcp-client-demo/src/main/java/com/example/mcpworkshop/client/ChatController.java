@@ -18,23 +18,33 @@ public class ChatController {
 	}
 	
 	@GetMapping("/github-summary")
-	   public String getGithubSummary(@RequestParam String repoOwner, @RequestParam String repoName) {
-	      
-	       var prompt = """
-	           Provide a daily summary for the GitHub repository {repoName} owned by {repoOwner}.
-	           The summary should cover activity in the last 24 hours and include:
-	           1. Recent commits to the main branch.
-	           2. Open pull requests that need attention.
-	           3. High-priority open issues.
-	           """;
+	public String getGithubSummary(@RequestParam String repoOwner, @RequestParam String repoName) {
+
+		var prompt = """
+				Provide a daily summary for the GitHub repository {repoName} owned by {repoOwner}.
+				The summary should cover activity in the last 24 hours and include:
+				1. Recent commits to the main branch.
+				2. Open pull requests that need attention.
+				3. High-priority open issues.
+				""";
 
 
-	       return chatClient.prompt()
-	           .user(userSpec -> userSpec
-	               .text(prompt)
-	               .param("repoOwner", repoOwner)
-	               .param("repoName", repoName))
-	           .call()
-	           .content();
+       return chatClient.prompt()
+           .user(userSpec -> userSpec
+               .text(prompt)
+               .param("repoOwner", repoOwner)
+               .param("repoName", repoName))
+           .call()
+           .content();
 	   }
+	
+	@GetMapping("/on-call")
+	public String getOnCallSupport() {
+		var prompt = "Who is on call for support today?";
+		return chatClient.prompt()
+               .user(prompt)
+               .call()
+               .content();
+	   }
+
 }
