@@ -10,7 +10,6 @@ In this workshop, we'll build an AI assistant that helps a developer start their
 
 *   "What are the recent activities in the `spring-projects/spring-ai` repository?"
 *   "Who is on call for support today?"
-*   "Summarize the recent GitHub activity and notify the on-call person on Slack."
 
 You can find the complete code for this workshop in this GitHub repository.
 
@@ -21,6 +20,7 @@ Before you begin, ensure you have the following installed:
 *   **Java 21 or higher**
 *   **Maven**: For building the project
 *   **Git**: For cloning the repository
+*   **Docker**: We'll use Docker to run the GitHub MCP Server. You can find installation instructions at the [official Docker website](https://docs.docker.com/get-docker/).
 *   **An IDE**: Your favorite IDE (Spring Tool Suite, IntelliJ IDEA, VS Code with Spring extensions)
 *   **An AI Model Provider Account**: You'll need an API key from a provider like OpenAI or Anthropic, or a locally running model with Ollama
 
@@ -122,24 +122,43 @@ Choose one of the following options to configure your connection to a Large Lang
 
     You should receive a JSON response from your local model.
 
-## Running the Application
+### 3. Configure GitHub Access Token
 
-This project is structured into sub-modules. To run a specific module (e.g., `mcp-client-demo`), navigate to its directory and use the Maven Spring Boot plugin.
+During the workshop, we will connect our Spring AI application to the [GitHub MCP Server](https://github.com/github/github-mcp-server) to interact with GitHub repositories. This requires a GitHub Personal Access Token (PAT).
 
-You'll need to activate the Spring profile corresponding to your chosen AI provider (`openai`, `anthropic`, or `ollama`).
+1.  **Create a Personal Access Token**: Follow the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) to create a "classic" token. When prompted for scopes, select the following:
+    *   `repo`
+    *   `read:org`
+    *   `read:user`
 
-```bash
-cd mcp-client-demo
-../mvnw spring-boot:run -Dspring-boot.run.profiles=openai
-```
+2.  **Store Your Token**: It is recommended to store your token in an environment variable or a `.env` file.
 
-Replace `openai` with `anthropic` or `ollama` if you are using a different provider.
+    **Option A: Environment Variable**
+    ```bash
+    export GITHUB_PERSONAL_ACCESS_TOKEN='<your-github-token>'
+    ```
 
-You can also run the application from your IDE by setting the active Spring profile in your run configuration.
+    **Option B: .env file**
+    Create a file named `.env` in the root of the project and add the following line:
+    ```
+    GITHUB_PERSONAL_ACCESS_TOKEN='<your-github-token>'
+    ```
+    To prevent accidentally committing your token, add `.env` to your `.gitignore` file:
+    ```bash
+    echo ".env" >> .gitignore
+    ```
+
+3.  **Verify Your Token**: To ensure your token is working correctly, make a request to the GitHub API. Make sure to replace `$GITHUB_PERSONAL_ACCESS_TOKEN` with your actual token if you are not using an environment variable.
+
+    ```bash
+    curl -H "Authorization: Bearer $GITHUB_PERSONAL_ACCESS_TOKEN" https://api.github.com/user
+    ```
+
+    A successful response will return a JSON object with your GitHub user profile information. This confirms your token is valid and has the correct permissions.
 
 ## Workshop Modules
 
-This repository contains the following modules, which we will build upon during the workshop:
+This repository contains the following modules, which we will build upon during the workshop. Please refer to the `README.md` file inside each module for detailed instructions on how to run them.
 
 *   `mcp-client-demo`: A Spring Boot application demonstrating how to connect to and use existing MCP servers.
 *   `mcp-server-demo`: A simple MCP server built with Spring Boot, exposing custom tools for an AI agent to use.

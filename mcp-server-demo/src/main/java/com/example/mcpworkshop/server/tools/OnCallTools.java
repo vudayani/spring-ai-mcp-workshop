@@ -26,7 +26,7 @@ public class OnCallTools {
         return LocalDate.now().toString();
     }
 
-    @Tool(name = "get_on_call_support_by_date", description = "Get the on-call support team for a specific date")
+    @Tool(name = "get_on_call_support_by_date", description = "Get the list of engineers on call for a specific date. Date format is YYYY-MM-DD.")
     public OnCallSupport getOnCallSupportByDate(String dateStr) {
     	log.info("Getting on call support information for the date");
         LocalDate date = LocalDate.parse(dateStr);
