@@ -6,7 +6,7 @@ We'll go beyond simple prompts to create applications that can reason over your 
 
 ## What We're Building
 
-In this workshop, we'll build an AI assistant that helps a developer start their day. We will build an MCP client that can connect to [Github MCP server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/github) and a custom MCP server that exposes internal tools. By the end, you'll be able to ask questions like:
+In this workshop, we'll build an AI assistant that helps a developer start their day. We will build an MCP client that can connect to [Github MCP server](https://github.com/github/github-mcp-server) and a custom MCP server that exposes internal tools. By the end, you'll be able to ask questions like:
 
 *   "What are the recent activities in the `spring-projects/spring-ai` repository?"
 *   "Who is on call for support today?"
