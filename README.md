@@ -21,6 +21,7 @@ Before you begin, ensure you have the following installed:
 *   **Maven**: For building the project
 *   **Git**: For cloning the repository
 *   **Docker**: We'll use Docker to run the GitHub MCP Server. You can find installation instructions at the [official Docker website](https://docs.docker.com/get-docker/).
+*   **Node.js and npx**: We'll use `npx` to run the MCP Model Inspector. You can install it from the [official Node.js website](https://nodejs.org/).
 *   **An IDE**: Your favorite IDE (Spring Tool Suite, IntelliJ IDEA, VS Code with Spring extensions)
 *   **An AI Model Provider Account**: You'll need an API key from a provider like OpenAI or Anthropic, or a locally running model with Ollama
 
@@ -155,6 +156,28 @@ During the workshop, we will connect our Spring AI application to the [GitHub MC
     ```
 
     A successful response will return a JSON object with your GitHub user profile information. This confirms your token is valid and has the correct permissions.
+
+## Exploring MCP with the Model Inspector
+
+Before we write any Java code, let's explore the Model Context Protocol (MCP) using the [Model Inspector](https://github.com/modelcontextprotocol/model-inspector). This command-line tool allows us to connect to any MCP server, view its available tools, and interact with them directly.
+
+The `npx` command lets us run these tools without a global installation. Open your terminal and try out the following pre-built servers.
+
+#### 1. Filesystem Server
+This server exposes tools that let an AI interact with your local filesystem (e.g., `list_files`, `read_file`).
+
+```bash
+npx -y @modelcontextprotocol/inspector npx @modelcontextprotocol/server-filesystem /path/to/a/directory
+```
+*Make sure to replace `/path/to/a/directory` with a real path on your machine, for example, your Desktop.*
+
+#### 2. Everything Server
+This server includes a wide variety of sample tools for demonstration purposes.
+
+```bash
+npx -y @modelcontextprotocol/inspector npx @modelcontextprotocol/server-everything
+```
+Playing with these servers will give you a feel for the request/response flow of MCP and the types of primitives you can expose.
 
 ## Workshop Modules
 

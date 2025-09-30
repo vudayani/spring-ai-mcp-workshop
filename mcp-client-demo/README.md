@@ -27,6 +27,11 @@ Before running the client, ensure you have completed all the setup steps in the 
 
     Alternatively, you can run the `McpClientDemoApplication` class from your IDE. Once the application starts, it will launch the GitHub MCP server in Docker and be ready to receive requests.
 
+3. Switch to a terminal and run the curl command
+    ```bash
+    curl "http://localhost:8080/github-summary?repoOwner=repoOwner&repoName=spring-ai"
+    ```
+
 ---
 
 ## Running the Application (Part 2: Adding the Custom Server)
