@@ -4,10 +4,10 @@ This Spring Boot application is a simple MCP (Model Context Protocol) server tha
 
 ## Overview
 
-This server exposes two tools for an AI model to use:
+This server exposes two tools for an AI model to use, which are automatically discovered by Spring AI:
 
-*   `getCurrentDate`: Returns the current date in `YYYY-MM-DD` format.
-*   `getOnCallSupportByDate`: Takes a date in `YYYY-MM-DD` format and returns a list of engineers who are on call.
+*   `getCurrentDate`: A method annotated with `@McpTool` that returns the current date.
+*   `getOnCallSupportByDate`: Another `@McpTool` method that returns the on-call engineers for a given date.
 
 ---
 
@@ -17,7 +17,7 @@ In this mode, the server communicates over standard input/output. This is useful
 
 ### 1. Configure for STDIO
 
-Open the `src/main/resources/application.properties` file and ensure the following lines are active:
+Open the `src/main/resources/application.properties` file and ensure the `STDIO` configuration is active:
 
 ```properties
 # For STDIO transport
@@ -27,9 +27,6 @@ spring.ai.mcp.server.stdio=true
 # Disable banner and logging for cleaner STDIO communication
 spring.main.banner-mode=off
 logging.level.root=OFF
-
-# HTTP server port (not used in STDIO mode, can be ignored or commented out)
-# server.port=8081
 ```
 
 ### 2. Build the Application
@@ -59,21 +56,24 @@ In this mode, the server runs as a standalone web service, exposing its MCP endp
 
 ### 1. Configure for HTTP
 
-Open `src/main/resources/application.properties` and modify it to enable the web server:
+Open `src/main/resources/application.properties` and switch to the HTTP configuration by commenting out the STDIO lines and uncommenting the HTTP lines. This involves enabling the web server and setting the protocol to `STREAMABLE`, which is the new default for HTTP transports.
 
 ```properties
-# For HTTP transport
+# Set the port for the HTTP server
+server.port=8081
+# Set the protocol to the modern Streamable HTTP transport
+spring.ai.mcp.server.protocol=STREAMABLE
+
+# Comment out the STDIO transport lines
+# For STDIO transport
 # spring.main.web-application-type=none
 # spring.ai.mcp.server.stdio=true
 
-# Re-enable banner and logging for normal server operation
-spring.main.banner-mode=console
-logging.level.root=INFO
+# Disable banner and logging for cleaner STDIO communication
+# spring.main.banner-mode=off
+# logging.level.root=OFF
 
-# Set the port for the HTTP server
-server.port=8081
 ```
-*Note: You are essentially commenting out the STDIO properties and enabling the standard web server properties.*
 
 ### 2. Run the Application
 

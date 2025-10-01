@@ -1,23 +1,19 @@
 package com.example.mcpworkshop.client;
 
-import java.util.List;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.modelcontextprotocol.client.McpSyncClient;
-
 @RestController
 public class ChatController {
 
 	private final ChatClient chatClient;
 
-	public ChatController(ChatClient.Builder builder, List<McpSyncClient> mcpSyncClients) {
+	public ChatController(ChatClient.Builder builder, SyncMcpToolCallbackProvider mcpTools) {
 		this.chatClient = builder
-				.defaultToolCallbacks(new SyncMcpToolCallbackProvider(mcpSyncClients))
+				.defaultToolCallbacks(mcpTools.getToolCallbacks())
 				.build();
 	}
 	
