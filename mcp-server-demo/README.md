@@ -85,3 +85,64 @@ Run the application as a standard Spring Boot application.
 ```
 
 The server will start on port `8081`. Now you can proceed to the second part of the `mcp-client-demo` to connect to this server over HTTP.
+
+---
+
+## Part 3: MCP Prompts and Resources
+
+Beyond tools, this server also exposes richer context to AI models using **Prompts** and **Resources**.
+
+*   **Resources**: These are documents or data that an AI can use for context. This server provides an official on-call policy document.
+*   **Prompts**: These are pre-defined prompt templates that can be used to guide an AI toward a specific task. This server includes a prompt for generating a daily GitHub summary.
+
+### 1. Build the Executable JAR
+
+First, ensure you have built the server in STDIO mode so you have an executable JAR file.
+
+```bash
+# From the mcp-server-demo directory
+./mvnw clean package
+```
+
+### 2. Configure Claude Desktop
+
+To add the server to Claude Desktop, you need to edit its configuration file.
+
+1.  Open Claude Desktop's settings.
+2.  Navigate to the **Developer** section.
+3.  Click on **Edit Config**. This will open the `claude_desktop_config.json` file in your default editor.
+
+Now, add the following `mcpServers` entry to the JSON file. Be sure to replace `/path/to/your/` with the actual, absolute path to the JAR file you just built.
+
+```json
+{
+  "mcpServers": {
+    "on-call": {
+      "command": "java",
+      "args": ["-jar", "/path/to/your/mcp-server-demo-0.0.1-SNAPSHOT.jar"]
+    }
+  }
+}
+```
+
+Save the file and restart Claude Desktop for the changes to take effect.
+
+### 3. Interact with your Server in Claude
+
+After restarting, your `on-call` server will be active. Here’s how to use it in the Claude UI:
+
+*   **View Connected Servers and Tools**: Click the **server icon** (which looks like a plug) in the chat input area. You will see your `on-call` server listed, and you can expand it to see the tools it provides (`getCurrentDate`, `getOnCallSupportByDate`).
+
+*   **Use Prompts and Resources**: Click the **plus icon (`+`)** in the chat input area. You will see a list of available context items, including:
+    *   `On-Call Escalation Policy` (a Resource)
+    *   `github-daily-summary-prompt` (a Prompt)
+
+*   **Example Usage**:
+    1.  Click the `+` icon and select the **On-Call Escalation Policy** to attach it to your conversation.
+    2.  Now you can ask questions about it directly:
+        > "What is the escalation path for a SEV-2 issue?"
+    3.  You can also ask questions that require the AI to use a tool:
+        > "Who is on call for support today?"
+    4.  To use the prompt, click the `+` icon and select the **github-daily-summary-prompt**. The prompt text will appear in your chat input, ready for you to fill in the repository details:
+        > Generate a concise daily summary for the GitHub repository 'spring-projects/spring-ai' owned by 'John'.
+        > ...
