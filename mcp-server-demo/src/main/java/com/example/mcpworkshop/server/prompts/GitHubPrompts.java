@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springaicommunity.mcp.annotation.McpPrompt;
+import org.springaicommunity.mcp.annotation.McpArg;
 import org.springframework.stereotype.Component;
 
 import io.modelcontextprotocol.spec.McpSchema.GetPromptResult;
@@ -18,10 +19,12 @@ public class GitHubPrompts {
 	private static final Logger log = LoggerFactory.getLogger(GitHubPrompts.class);
 
 
-    @McpPrompt(name = "github-daily-summary", description = "A prompt template to generate a daily summary of a GitHub repository's activity.")
-    public GetPromptResult getGitHubDailySummaryPrompt() {
+    @McpPrompt(name = "github-daily-summary-prompt", description = "A prompt template to generate a daily summary of a GitHub repository's activity.")
+    public GetPromptResult getGitHubDailySummaryPrompt(
+			@McpArg(name = "repoOwner", description = "The owner of the GitHub repository (e.g., 'spring-projects')", required = true) String repoOwner,
+			@McpArg(name = "repoName", description = "The name of the GitHub repository (e.g., 'spring-ai')", required = true) String repoName) {
         String message = """
-                Provide a daily summary of the GitHub repository {repoName} owned by {repoOwner}. The summary should include the following sections:
+                Provide a daily summary of the GitHub repository %s owned by %s. The summary should include the following sections:
 
                 ### **1. Recent Commits:**
                    - Summarize latest commits made to the 'main' branch in the last 24 hours
@@ -44,18 +47,14 @@ public class GitHubPrompts {
                       - Title with a direct link to issue
                       - Labels or milestones
 
-                ### **4. Formatting for Slack:**
-                   - Present the information in a structured and well-organized format.
-                   - Use **bold headings** and bullet points for clarity.
-                   - If a section has no updates, clearly indicate that.
-                   - End with a gentle reminder for the team to review PRs or resolve critical issues.
-                   - Post the summary to the '#dev-updates' Slack channel.
-
                 The summary should be concise, clear, and actionable to help the development team quickly understand the repository's status and priorities.
                 """;
+        
+        String formattedMessage = String.format(message, repoName, repoOwner);
+        
         return new GetPromptResult(
                 "GitHub daily summary prompt",
-                List.of(new PromptMessage(Role.USER, new TextContent(message)))
+                List.of(new PromptMessage(Role.USER, new TextContent(formattedMessage)))
         );
     }
 }

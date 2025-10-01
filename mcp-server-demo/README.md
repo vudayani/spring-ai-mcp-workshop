@@ -106,14 +106,18 @@ First, ensure you have built the server in STDIO mode so you have an executable 
 
 ### 2. Configure Claude Desktop
 
-Next, add the server to your Claude Desktop configuration file. On macOS, this file is typically located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
+To add the server to Claude Desktop, you need to edit its configuration file.
 
-Add the following entry, making sure to replace `/path/to/your/` with the actual path to the JAR file you just built.
+1.  Open Claude Desktop's settings.
+2.  Navigate to the **Developer** section.
+3.  Click on **Edit Config**. This will open the `claude_desktop_config.json` file in your default editor.
+
+Now, add the following `mcpServers` entry to the JSON file. Be sure to replace `/path/to/your/` with the actual, absolute path to the JAR file you just built.
 
 ```json
 {
   "mcpServers": {
-    "on-call-support-server": {
+    "on-call": {
       "command": "java",
       "args": ["-jar", "/path/to/your/mcp-server-demo-0.0.1-SNAPSHOT.jar"]
     }
@@ -121,27 +125,24 @@ Add the following entry, making sure to replace `/path/to/your/` with the actual
 }
 ```
 
+Save the file and restart Claude Desktop for the changes to take effect.
+
 ### 3. Interact with your Server in Claude
 
-After restarting Claude Desktop, your server will be available. You can now interact with it:
+After restarting, your `on-call` server will be active. Here’s how to use it in the Claude UI:
 
-*   **Connect to the Server**: Use the `/connect` command to connect to your server.
-    ```
-    /connect on-call-support-server
-    ```
+*   **View Connected Servers and Tools**: Click the **server icon** (which looks like a plug) in the chat input area. You will see your `on-call` server listed, and you can expand it to see the tools it provides (`getCurrentDate`, `getOnCallSupportByDate`).
 
-*   **List Available Context**: Use the `/list` command to see all the tools, prompts, and resources your server exposes.
-    ```
-    /list
-    ```
-    Claude will display `getCurrentDate`, `getOnCallSupportByDate`, the `github-daily-summary` prompt, and the `on-call://escalation-policy` resource.
+*   **Use Prompts and Resources**: Click the **plus icon (`+`)** in the chat input area. You will see a list of available context items, including:
+    *   `On-Call Escalation Policy` (a Resource)
+    *   `github-daily-summary-prompt` (a Prompt)
 
-*   **Attach a Resource**: Attach the policy document to your conversation to ask questions about it.
-    ```
-    /attach on-call://escalation-policy
-    ```
-    Now you can ask:
-    > "What is the escalation path for a SEV-2 issue?"
-
-*   **Use a Tool**: You can also invoke tools directly or ask a question that would cause the AI to use a tool.
-    > "Who is on call for support today?"
+*   **Example Usage**:
+    1.  Click the `+` icon and select the **On-Call Escalation Policy** to attach it to your conversation.
+    2.  Now you can ask questions about it directly:
+        > "What is the escalation path for a SEV-2 issue?"
+    3.  You can also ask questions that require the AI to use a tool:
+        > "Who is on call for support today?"
+    4.  To use the prompt, click the `+` icon and select the **github-daily-summary-prompt**. The prompt text will appear in your chat input, ready for you to fill in the repository details:
+        > Generate a concise daily summary for the GitHub repository 'spring-projects/spring-ai' owned by 'John'.
+        > ...
