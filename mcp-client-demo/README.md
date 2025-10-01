@@ -79,34 +79,18 @@ In this method, the client will launch the server's JAR file directly and commun
 3.  **Restart the Application**: Run the `mcp-client-demo` application again. It will now launch and connect to 
 *both* the GitHub server and the custom on-call server, making all their tools available to the AI model.
 
-### Option B: Connecting via HTTP
+### Option B: Connecting via HTTP (Streamable Transport)
 
-In this method, the `mcp-server-demo` runs independently as a web server, and our client connects to its HTTP endpoint.
+In this method, the `mcp-server-demo` runs independently as a web server, and our client connects to its HTTP endpoint using the modern **Streamable HTTP** transport.
 
-1.  **Start the MCP Server**: Follow the "Part 2: Running in HTTP Mode" instructions in the `mcp-server-demo/README.md` to configure and start the server.
+1.  **Start the MCP Server**: Follow the "Part 2: Running in HTTP Mode" instructions in the `mcp-server-demo/README.md` to configure and start the server. Ensure it is running and accessible on `http://localhost:8081`.
 
-2.  **Update MCP Configuration**: Open `src/main/resources/mcp-servers-config.json` and add the `on-call` server, this time configuring it to connect via HTTP.
+2.  **Update Client Configuration**: The Streamable HTTP transport is configured directly in `application.properties`. Open `src/main/resources/application.properties` in *this* module (`mcp-client-demo`) and add the following lines:
 
-    ```json
-    {
-      "servers": [
-        {
-          "name": "github",
-          "command": "docker",
-          "args": [
-            "run", "-i", "--rm",
-            "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
-            "ghcr.io/github/github-mcp-server"
-          ],
-          "transport": "stdio"
-        },
-        {
-          "name": "on-call",
-          "uri": "http://localhost:8081",
-          "transport": "http"
-        }
-      ]
-    }
+    ```properties
+    # On-Call Server Connection (Streamable HTTP)
+    spring.ai.mcp.client.streamable-http.connections.on-call.url=http://localhost:8081/mcp
     ```
+    *Note: The default endpoint for the Streamable WebMVC server is `/mcp`. If you only point to the root (`/`), you will get a 404 error.*
 
-3.  **Restart the Application**: Run the `mcp-client-demo` again. It will connect to the running `on-call` server over HTTP.
+3.  **Restart the Application**: Run the `mcp-client-demo` again. It will now connect to the running `on-call` server over HTTP. The client will still manage the GitHub server via `stdio` (from the `mcp-servers-config.json` file) and will now also be connected to your custom server via Streamable HTTP.

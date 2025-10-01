@@ -56,19 +56,23 @@ In this mode, the server runs as a standalone web service, exposing its MCP endp
 
 ### 1. Configure for HTTP
 
-Open `src/main/resources/application.properties` and switch to the HTTP configuration by commenting out the STDIO lines and uncommenting the HTTP lines.
+Open `src/main/resources/application.properties` and switch to the HTTP configuration by commenting out the STDIO lines and uncommenting the HTTP lines. This involves enabling the web server and setting the protocol to `STREAMABLE`, which is the new default for HTTP transports.
 
 ```properties
-# For HTTP transport
+# Set the port for the HTTP server
+server.port=8081
+# Set the protocol to the modern Streamable HTTP transport
+spring.ai.mcp.server.protocol=STREAMABLE
+
+# Comment out the STDIO transport lines
+# For STDIO transport
 # spring.main.web-application-type=none
 # spring.ai.mcp.server.stdio=true
 
-# Re-enable banner and logging for normal server operation
-spring.main.banner-mode=console
-logging.level.root=INFO
+# Disable banner and logging for cleaner STDIO communication
+# spring.main.banner-mode=off
+# logging.level.root=OFF
 
-# Set the port for the HTTP server
-server.port=8081
 ```
 
 ### 2. Run the Application
