@@ -85,3 +85,63 @@ Run the application as a standard Spring Boot application.
 ```
 
 The server will start on port `8081`. Now you can proceed to the second part of the `mcp-client-demo` to connect to this server over HTTP.
+
+---
+
+## Part 3: MCP Prompts and Resources
+
+Beyond tools, this server also exposes richer context to AI models using **Prompts** and **Resources**.
+
+*   **Resources**: These are documents or data that an AI can use for context. This server provides an official on-call policy document.
+*   **Prompts**: These are pre-defined prompt templates that can be used to guide an AI toward a specific task. This server includes a prompt for generating a daily GitHub summary.
+
+### 1. Build the Executable JAR
+
+First, ensure you have built the server in STDIO mode so you have an executable JAR file.
+
+```bash
+# From the mcp-server-demo directory
+./mvnw clean package
+```
+
+### 2. Configure Claude Desktop
+
+Next, add the server to your Claude Desktop configuration file. On macOS, this file is typically located at `~/Library/Application Support/Claude/claude_desktop_config.json`.
+
+Add the following entry, making sure to replace `/path/to/your/` with the actual path to the JAR file you just built.
+
+```json
+{
+  "mcpServers": {
+    "on-call-support-server": {
+      "command": "java",
+      "args": ["-jar", "/path/to/your/mcp-server-demo-0.0.1-SNAPSHOT.jar"]
+    }
+  }
+}
+```
+
+### 3. Interact with your Server in Claude
+
+After restarting Claude Desktop, your server will be available. You can now interact with it:
+
+*   **Connect to the Server**: Use the `/connect` command to connect to your server.
+    ```
+    /connect on-call-support-server
+    ```
+
+*   **List Available Context**: Use the `/list` command to see all the tools, prompts, and resources your server exposes.
+    ```
+    /list
+    ```
+    Claude will display `getCurrentDate`, `getOnCallSupportByDate`, the `github-daily-summary` prompt, and the `on-call://escalation-policy` resource.
+
+*   **Attach a Resource**: Attach the policy document to your conversation to ask questions about it.
+    ```
+    /attach on-call://escalation-policy
+    ```
+    Now you can ask:
+    > "What is the escalation path for a SEV-2 issue?"
+
+*   **Use a Tool**: You can also invoke tools directly or ask a question that would cause the AI to use a tool.
+    > "Who is on call for support today?"

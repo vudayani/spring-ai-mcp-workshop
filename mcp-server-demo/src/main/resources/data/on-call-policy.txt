@@ -1,0 +1,29 @@
+## On-Call Escalation Policy
+
+This document outlines the official procedure for escalating on-call support issues to ensure timely resolution.
+
+### **Severity Levels**
+
+*   **SEV-1 (Critical):** System-wide outage, major feature failure, data corruption. Requires immediate attention.
+*   **SEV-2 (High):** Significant feature degradation, partial system outage, user-facing errors for a large number of users.
+*   **SEV-3 (Medium):** Minor feature not working, isolated user impact, performance degradation.
+
+### **Escalation Path**
+
+1.  **Initial Contact (All Severities):**
+    *   Always contact the **primary on-call engineer** first.
+    *   **Primary Communication Channel:** Slack channel `#on-call-alerts`.
+    *   **Secondary Communication Channel:** PagerDuty alert.
+
+2.  **No Response (15 minutes for SEV-1/SEV-2):**
+    *   If the primary engineer does not acknowledge the alert within **15 minutes**, the issue is automatically escalated to the **secondary on-call engineer**.
+
+3.  **Further Escalation (Another 15 minutes for SEV-1):**
+    *   If neither the primary nor secondary engineer responds within another **15 minutes** for a SEV-1 issue, contact the **On-Call Support Lead, 'Support Lead'**.
+
+4.  **SEV-3 Issues:**
+    *   If the primary engineer does not respond within 1 hour, the issue can be logged as a ticket and reviewed during business hours. Direct escalation is not required unless the issue is upgraded in severity.
+
+### **Post-Incident Review**
+
+*   All SEV-1 and SEV-2 incidents require a post-incident review (PIR) to be completed within 48 hours of resolution.
