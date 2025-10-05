@@ -94,3 +94,8 @@ In this method, the `mcp-server-demo` runs independently as a web server, and ou
     *Note: The default endpoint for the Streamable WebMVC server is `/mcp`. If you only point to the root (`/`), you will get a 404 error.*
 
 3.  **Restart the Application**: Run the `mcp-client-demo` again. It will now connect to the running `on-call` server over HTTP. The client will still manage the GitHub server via `stdio` (from the `mcp-servers-config.json` file) and will now also be connected to your custom server via Streamable HTTP.
+
+4. Switch to a terminal and run the curl command
+    ```bash
+    curl "http://localhost:8080/on-call"
+    ```

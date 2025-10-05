@@ -43,7 +43,7 @@ Package the application to create an executable JAR file.
 You can now use a tool like the [Model Inspector](https://github.com/modelcontextprotocol/model-inspector) to connect to your server. In the Model Inspector, configure a new client with the following command, adjusting the path to your JAR file:
 
 ```
-java -jar path/to/mcp-server-demo-0.0.1-SNAPSHOT.jar
+npx -y @modelcontextprotocol/inspector java -jar path/to/mcp-server-demo-0.0.1-SNAPSHOT.jar
 ```
 
 You will be able to see the available tools (`getCurrentDate`, `getOnCallSupportByDate`) and interact with them.
