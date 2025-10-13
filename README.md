@@ -82,7 +82,7 @@ Choose one of the following options to configure your connection to a Large Lang
       --header "anthropic-version: 2023-06-01" \
       --header "content-type: application/json" \
       --data '{
-          "model": "claude-3-sonnet-20240229",
+          "model": "claude-sonnet-4-5-20250929",
           "max_tokens": 1024,
           "messages": [
               {"role": "user", "content": "Tell me a joke"}
@@ -91,37 +91,6 @@ Choose one of the following options to configure your connection to a Large Lang
     ```
 
     A successful response will confirm your key is valid.
-
-#### Option C: Ollama (Local Model)
-
-1.  **Run Ollama with Docker**: Start the Ollama container. The `--gpus=all` flag is for NVIDIA GPUs; adjust if necessary for your hardware.
-
-    ```bash
-    docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-    ```
-
-2.  **Pull a Model**: Pull a model to run locally. We recommend `llama3`.
-
-    ```bash
-    docker exec -it ollama ollama pull llama3
-    ```
-
-3.  **Verify Your Setup**: Send a request to the local Ollama server.
-
-    ```bash
-    curl http://localhost:11434/api/chat -d '{
-      "model": "llama3",
-      "messages": [
-        {
-          "role": "user",
-          "content": "Tell me a joke"
-        }
-      ],
-      "stream": false
-    }'
-    ```
-
-    You should receive a JSON response from your local model.
 
 ### 3. Configure GitHub Access Token
 

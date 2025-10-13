@@ -16,9 +16,11 @@ Later in the workshop, we will update the configuration to connect to our own cu
 
 Before running the client, ensure you have completed all the setup steps in the main `README.md` at the root of this project, including configuring your LLM and GitHub API keys.
 
-1.  **Configure the LLM Provider**: Open the `src/main/resources/application.properties` file in this module. Uncomment the two lines corresponding to the LLM provider you wish to use (OpenAI, Anthropic, or Ollama).
+1.  **Configure the LLM Provider**: Open this module's `pom.xml` file and ensure the correct Spring AI starter module for your desired LLM provider is enabled. By default, `spring-ai-starter-model-openai` is active. To switch, comment it out and add the dependency for another provider (e.g., `spring-ai-starter-model-anthropic` or `spring-ai-starter-model-ollama`).
 
-2.  **Run the Application**: Navigate to this module's directory and use the Maven Spring Boot plugin to run the application.
+2.  **Configure API Keys and Settings**: Open `src/main/resources/application.properties`. Configure the properties corresponding to the LLM provider you enabled in the `pom.xml`.
+
+3.  **Run the Application**: Navigate to this module's directory and use the Maven Spring Boot plugin to run the application.
 
     ```bash
     # From the mcp-client-demo directory
@@ -27,9 +29,9 @@ Before running the client, ensure you have completed all the setup steps in the 
 
     Alternatively, you can run the `McpClientDemoApplication` class from your IDE. Once the application starts, it will launch the GitHub MCP server in Docker and be ready to receive requests.
 
-3. Switch to a terminal and run the curl command
+4. Switch to a terminal and run the curl command
     ```bash
-    curl "http://localhost:8080/github-summary?repoOwner=repoOwner&repoName=spring-ai"
+    curl "http://localhost:8080/github-summary?repoOwner=vudayani&repoName=spring-ai-mcp-workshop"
     ```
 
 ---
