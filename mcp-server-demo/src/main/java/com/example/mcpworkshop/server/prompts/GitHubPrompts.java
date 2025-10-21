@@ -24,10 +24,10 @@ public class GitHubPrompts {
 			@McpArg(name = "repoOwner", description = "The owner of the GitHub repository (e.g., 'spring-projects')", required = true) String repoOwner,
 			@McpArg(name = "repoName", description = "The name of the GitHub repository (e.g., 'spring-ai')", required = true) String repoName) {
         String message = """
-                Provide a daily summary of the GitHub repository %s owned by %s. The summary should include the following sections:
+                Provide a summary of the GitHub repository %s owned by %s. The summary should include the following sections:
 
                 ### **1. Recent Commits:**
-                   - Summarize latest commits made to the 'main' branch in the last 24 hours
+                   - Summarize latest commits made to the 'main' branch
                    - For each commit, include:
                      - Commit messages (with a Short description if available of the commit purpose)
                      - Authors and date

@@ -21,11 +21,11 @@ public class ChatController {
 	public String getGithubSummary(@RequestParam String repoOwner, @RequestParam String repoName) {
 
 		var prompt = """
-				Provide a daily summary for the GitHub repository {repoName} owned by {repoOwner}.
-				The summary should cover activity in the last 24 hours and include:
-				1. Recent commits to the main branch.
-				2. Open pull requests that need attention.
-				3. High-priority open issues.
+				Provide a summary for latest activity in the GitHub repository {repoName} owned by {repoOwner}.
+				The summary should include:
+				1. Recent commits to the main branch
+				2. Open pull requests that need attention
+				3. High-priority open issues
 				""";
 
 
