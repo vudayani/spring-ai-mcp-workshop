@@ -33,7 +33,7 @@ public class OnCallResources {
     @PostConstruct
     public void init() {
         log.info("Loading On-Call Escalation Policy from file 'on-call-policy.txt'");
-        ClassPathResource resource = new ClassPathResource("/data/on-call-policy.txt");
+        ClassPathResource resource = new ClassPathResource("/data/on-call-escalation-policy.txt");
         try (Reader reader = new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)) {
             this.escalationPolicy = FileCopyUtils.copyToString(reader);
             log.info("On-Call Escalation Policy loaded successfully.");

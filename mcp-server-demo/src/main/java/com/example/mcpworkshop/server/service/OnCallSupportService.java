@@ -11,9 +11,9 @@ import java.util.Optional;
 public class OnCallSupportService {
 
     private static final Map<LocalDate, OnCallSupport> onCallRoster = Map.of(
-            LocalDate.of(2025, 10, 18), new OnCallSupport("Alice", "Bob"),
-            LocalDate.of(2025, 10, 19), new OnCallSupport("Charlie", "David"),
-            LocalDate.of(2025, 10, 20), new OnCallSupport("Eve", "Frank")
+            LocalDate.of(2025, 10, 27), new OnCallSupport("Alice", "Bob"),
+            LocalDate.of(2025, 10, 28), new OnCallSupport("Charlie", "David"),
+            LocalDate.of(2025, 10, 29), new OnCallSupport("Eve", "Frank")
     );
 
     public Optional<OnCallSupport> findOnCallSupportByDate(LocalDate date) {
