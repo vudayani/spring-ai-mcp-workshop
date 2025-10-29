@@ -48,6 +48,10 @@ npx -y @modelcontextprotocol/inspector java -jar path/to/mcp-server-demo-0.0.1-S
 
 You will be able to see the available tools (`getCurrentDate`, `getOnCallSupportByDate`) and interact with them.
 
+### 4. Connect with `mcp-client-demo`: 
+Now that we have our custom MCP server, let's see how it integrates with a real Spring Boot application. This demonstrates how our custom on-call server provides tools that can be consumed by any MCP-compatible client.
+
+Follow the steps from [Option A: Connecting via STDIO](https://github.com/vudayani/spring-ai-mcp-workshop/blob/main/mcp-client-demo/README.md#option-a-connecting-via-stdio) to connect this server to the `mcp-client-demo` application we built previously.
 ---
 
 ## Part 2: Running in HTTP Mode
@@ -84,7 +88,7 @@ Run the application as a standard Spring Boot application.
 ./mvnw spring-boot:run
 ```
 
-The server will start on port `8081`. Now you can proceed to the second part of the `mcp-client-demo` to connect to this server over HTTP.
+The server will start on port `8081`. Now you can proceed to the [Option B: Connecting via HTTP (Streamable Transport)](https://github.com/vudayani/spring-ai-mcp-workshop/blob/main/mcp-client-demo/README.md#option-b-connecting-via-http-streamable-transport) section of the `mcp-client-demo` to connect to this server over HTTP.
 
 ---
 
