@@ -17,6 +17,34 @@ public class ChatController {
 				.build();
 	}
 	
+	@GetMapping("/github-create-issue")
+	public String getGithubIssue(@RequestParam String repoOwner, @RequestParam String repoName) {
+
+		var prompt = """
+				A build has failed for the repository {repoName} owned by {repoOwner}.
+
+				Failure Summary:
+				- Error: NullPointerException in UserController.java at line 58
+				- Cause: The 'userService' bean was not initialized before use
+				- Impact: User registration and login endpoints are failing
+				
+				Please create a GitHub issue in this repository describing the failure.
+				Include:
+				1. A clear, concise title for the issue
+				2. A short description summarizing the error
+				3. Suggested next steps for fixing it
+				""";
+
+
+       return chatClient.prompt()
+           .user(userSpec -> userSpec
+               .text(prompt)
+               .param("repoOwner", repoOwner)
+               .param("repoName", repoName))
+           .call()
+           .content();
+	   }
+	
 	@GetMapping("/github-summary")
 	public String getGithubSummary(@RequestParam String repoOwner, @RequestParam String repoName) {
 
@@ -48,3 +76,10 @@ public class ChatController {
 	   }
 
 }
+
+
+
+
+
+
+
