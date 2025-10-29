@@ -109,3 +109,24 @@ In this method, the `mcp-server-demo` runs independently as a web server, and ou
     ```bash
     curl "http://localhost:8080/on-call"
     ```
+
+## Resources
+
+### Official Resources
+- [Spring AI Project](https://spring.io/projects/spring-ai)
+- [Spring AI Reference Documentation](https://docs.spring.io/spring-ai/reference/)
+- [Spring AI API Documentation](https://docs.spring.io/spring-ai/docs/1.0.0-SNAPSHOT/api/)
+
+### Code Examples
+
+- [Spring AI Official Examples](https://github.com/spring-projects/spring-ai-examples) - Comprehensive official repository containing examples for all Spring AI features including MCP dynamic tools, prompt engineering patterns, agentic workflows, vector stores, and various model integrations (2025)
+
+### Core Resources
+- [MCP Client Documentation](https://docs.spring.io/spring-ai/reference/api/clients/mcp-client.html) - Official documentation for implementing the Model Context Protocol client in Spring AI applications.
+- [MCP Client Examples](https://github.com/spring-projects/spring-ai-examples/tree/main/model-context-protocol) - Comprehensive examples showcasing the Model Context Protocol implementation in Spring AI, including client-server communication, tool discovery, filesystem operations, weather services, web search integration, and dynamic tool updates.
+- [MCP Annotations](https://github.com/spring-ai-community/mcp-annotations) - Annotation-based programming model for implementing MCP servers and clients. Provides a clean, declarative approach to handling MCP operations with reduced boilerplate code. Includes core annotations that depend only on the MCP Java SDK and a Spring AI integration module.
+
+### Talks & Videos
+- [#1 Spring AI Tutorial | Introduction](https://www.youtube.com/watch?v=4nBG848oArI) - Introductory tutorial covering Spring AI basics and setup
+- [From Single-Shot LLMs to Intelligent Agents](https://www.youtube.com/watch?v=l38CPjOYsHk) - Building intelligent agents with Spring AI framework
+- [AI for Java Developers: Full Course / Workshop on Getting Started with Spring AI](https://www.youtube.com/watch?v=FzLABAppJfM) - Comprehensive workshop covering Spring AI fundamentals for Java developers

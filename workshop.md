@@ -67,7 +67,61 @@ npx -y @modelcontextprotocol/inspector npx @modelcontextprotocol/server-filesyst
 ```
 *Replace `/path/to/a/directory` with a real path (e.g., your Desktop)*
 
-### 2. Build and Run MCP Client Demo
+### 2. Locate Docker (binary path for MCP config)
+If Docker is already on your PATH, you can simply use `"command":"docker"`:
+```bash
+{
+ "mcpServers": {
+   "github": {
+     "command": "docker",
+     "args": [
+        "run", "-i", "--rm",
+        "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server",
+        "stdio"
+     ]
+}
+```
+However, if you see an error like:
+```bash
+`Caused by: java.io.IOException: Cannot run program "docker": error=2, No such file or directory`
+```
+It means your Java process can’t find Docker, even though it works in your Terminal.
+
+This often happens when running your app from an IDE or as a background process — those environments usually inherit a trimmed PATH, missing Docker’s directory.
+
+Option 1: Launch your app from the Terminal
+Run your Spring Boot app directly from a Terminal where Docker works:
+```bash
+./mvnw spring-boot:run
+```
+This ensures the PATH from your shell (which includes Docker) is used by the app.
+
+Option 2: Use the absolute path to Docker
+If you still face issues, find the full path to Docker and use it in your MCP config.
+
+#### macOS / Linux (bash/zsh):
+```bash
+which docker
+# or
+command -v docker
+```
+
+#### Windows (CMD):
+```bash
+where docker
+```
+
+**Note**: Use the full path reported by these commands in your MCP config.
+Example (Windows): C:\Program Files\Docker\Docker\resources\bin\docker.exe
+In JSON, escape backslashes: C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe
+
+Then update your MCP config:
+```bash
+"command": "/opt/homebrew/bin/docker"
+```
+
+### 3. Build and Run MCP Client Demo
 
 **Navigate to client directory:**
 ```bash
@@ -84,21 +138,20 @@ cd mcp-client-demo
 curl "http://localhost:8080/github-create-issue?repoOwner=vudayani&repoName=spring-ai-mcp-workshop"
 ```
 
-### 3. Configure On-Call Server in Client
+### 4. Configure On-Call Server in Client
 
 **Add to `mcp-servers-config.json`:**
 ```json
-    {
-      "name": "on-call",
-      "command": "java",
-      "args": [
-        "-jar",
-        "../../mcp-server-demo/target/mcp-server-demo-0.0.1-SNAPSHOT.jar"
-      ],
+    "on-call": {
+       "command": "java",
+       "args": [
+           "-jar",
+           "../../mcp-server-demo/target/mcp-server-demo-0.0.1-SNAPSHOT.jar"
+       ]
     }
 ```
 
-### 4. Build and Test On-Call Server
+### 5. Build and Test On-Call Server
 
 **Build the server:**
 ```bash
