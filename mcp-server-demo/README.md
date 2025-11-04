@@ -52,6 +52,7 @@ You will be able to see the available tools (`getCurrentDate`, `getOnCallSupport
 Now that we have our custom MCP server, let's see how it integrates with a real Spring Boot application. This demonstrates how our custom on-call server provides tools that can be consumed by any MCP-compatible client.
 
 Follow the steps from [Option A: Connecting via STDIO](https://github.com/vudayani/spring-ai-mcp-workshop/blob/main/mcp-client-demo/README.md#option-a-connecting-via-stdio) to connect this server to the `mcp-client-demo` application we built previously.
+
 ---
 
 ## Part 2: Running in HTTP Mode
@@ -65,6 +66,7 @@ Open `src/main/resources/application.properties` and switch to the HTTP configur
 ```properties
 # Set the port for the HTTP server
 server.port=8081
+spring.ai.mcp.server.stdio=false
 # Set the protocol to the modern Streamable HTTP transport
 spring.ai.mcp.server.protocol=STREAMABLE
 

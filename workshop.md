@@ -130,7 +130,7 @@ cd mcp-client-demo
 
 **Run the application:**
 ```bash
-../mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 
 **Test GitHub endpoint:**
