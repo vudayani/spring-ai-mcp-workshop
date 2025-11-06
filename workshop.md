@@ -123,9 +123,29 @@ Then update your MCP config:
 
 ### 3. Build and Run MCP Client Demo
 
+**Add github server configuration**
+```bash
+{
+ "mcpServers": {
+   "github": {
+     "command": "/usr/local/bin/docker",
+     "args": [
+        "run", "-i", "--rm",
+        "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server",
+        "stdio"
+     ]
+   }
+  }
+}
+```
+
 **Navigate to client directory:**
 ```bash
 cd mcp-client-demo
+
+export OPENAI_API_KEY='<openai-api-key>'
+export GITHUB_PERSONAL_ACCESS_TOKEN='<your-github-token>'
 ```
 
 **Run the application:**
