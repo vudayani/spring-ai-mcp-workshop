@@ -13,6 +13,7 @@
   <modules>
 	<module>mcp-client-demo</module>
 	<module>mcp-server-demo</module>
+	<module>spring-ai-demo</module>
   </modules>
   
 </project>
