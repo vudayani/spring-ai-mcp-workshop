@@ -4,7 +4,7 @@
 Spring_ai_demo is a Spring Boot application demonstrating integration with OpenAI's GPT models using the Spring AI framework. It provides REST endpoints to interact with AI models and includes configuration for chat, memory, and vector support.
 
 ## Project Structure
-
+``` code
 src/main/java/com/example/spring_ai_demo/ 
 ├── SpringAiDemoApplication.java 
 ├── config/ 
@@ -33,7 +33,7 @@ src/main/resources/
 │ └── build-analysis.st
 ├── static/
 └── templates/
-
+```
 ## Requirements
 - Java 17+
 - Maven 3.8+
