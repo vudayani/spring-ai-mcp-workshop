@@ -17,7 +17,22 @@ src/main/java/com/example/spring_ai_demo/
 ├── CICDTools.java 
 └── LogLoader.java 
 src/main/resources/ 
-└── application.properties
+├── application.properties
+├── dev-docs/
+│ ├── backend_build_failed.log
+│ ├── commit_history.log
+│ ├── deployment_failed.log
+│ ├── deployment_success.log
+│ ├── docker_build_failed.log
+│ ├── Dockerfile
+│ ├── jenkins_pipeline.log
+│ ├── merge_conflict.log
+│ ├── OrderServiceTest_failed.log
+│ └── UserControllerTest_failure.log
+├── prompt/
+│ └── build-analysis.st
+├── static/
+└── templates/
 
 ## Requirements
 - Java 17+
