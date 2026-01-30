@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -64,7 +65,7 @@ public class AIController {
     // Update chat memory
     chatMemory.add(sessionId, new UserMessage(message));
     assert response != null;
-    chatMemory.add(sessionId, new SystemMessage(response));
+    chatMemory.add(sessionId, new AssistantMessage(response));
     return response;
   }
 }
