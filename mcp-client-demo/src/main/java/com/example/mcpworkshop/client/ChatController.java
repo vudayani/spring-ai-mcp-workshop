@@ -1,9 +1,5 @@
 package com.example.mcpworkshop.client;
 
-//import org.springframework.ai.chat.client.ChatClient;
-//import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,6 +41,15 @@ public class ChatController {
 //            .content();
 //	    }
 	
+//	 @GetMapping("/on-call")
+//	 public String getOnCallSupport() {
+//	 	var prompt = "Who is on call for support today?";
+//	 	return chatClient.prompt()
+//               .user(prompt)
+//               .call()
+//               .content();
+//	    }
+	
 //	 @GetMapping("/github-summary")
 //	 public String getGithubSummary(@RequestParam String repoOwner, @RequestParam String repoName) {
 //
@@ -65,13 +70,4 @@ public class ChatController {
 //            .content();
 //	    }
 	
-//	 @GetMapping("/on-call")
-//	 public String getOnCallSupport() {
-//	 	var prompt = "Who is on call for support today?";
-//	 	return chatClient.prompt()
-//                .user(prompt)
-//                .call()
-//                .content();
-//	    }
-
 }

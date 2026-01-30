@@ -80,6 +80,8 @@ If Docker is already on your PATH, you can simply use `"command":"docker"`:
         "ghcr.io/github/github-mcp-server",
         "stdio"
      ]
+    }
+  }
 }
 ```
 However, if you see an error like:
@@ -128,7 +130,7 @@ Then update your MCP config:
 {
  "mcpServers": {
    "github": {
-     "command": "/usr/local/bin/docker",
+     "command": "docker",
      "args": [
         "run", "-i", "--rm",
         "-e", "GITHUB_PERSONAL_ACCESS_TOKEN",

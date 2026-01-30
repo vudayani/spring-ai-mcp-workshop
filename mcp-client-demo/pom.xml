@@ -14,21 +14,9 @@
 	<name>mcp-client-demo</name>
 	<description>Spring Boot app that connects to MCP servers (GitHub MCP, Slack MCP, custom on-call server)</description>
 	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<spring-ai.version>1.1.0-M2</spring-ai.version>
+		<spring-ai.version>1.1.0</spring-ai.version>
 	</properties>
 	<dependencies>
 		<dependency>
